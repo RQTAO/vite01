@@ -1,5 +1,5 @@
 # Simple workflow for deploying static content to GitHub Pages
-name: Deploy static content to Pages
+name: Deploy to GitHub Pages  
 
 on:
   # Runs on pushes targeting the default branch
@@ -21,27 +21,22 @@ concurrency:
   group: "pages"
   cancel-in-progress: false
 
-jobs:
-  build-and-deploy:
-    concurrency: ci-${{ github.ref }}
-    runs-on: ubuntu-latest
-    steps:
+jobs:  
+  build-and-deploy:  
+    runs-on: ubuntu-latest  
+    steps:  
+      - name: Checkout  
+        uses: actions/checkout@v3  
+ 
+      - name: Install dependencies  
+        run: npm install  
+ 
+      - name: Build  
+        run: npm run build  
+ 
       - name: Deploy  
         uses: JamesIves/github-pages-deploy-action@v4.3.3  
-        with:  
-          branch: gh-pages  
-          folder: dist  
-          token: ${{ secrets.ACCESS_TOKEN }}
-      - name: Checkout  ️ # 将代码拉取到虚拟机
-        uses: actions/checkout@v3
-
-      - name: Install and Build   # 安装依赖、打包，如果提前已打包好无需这一步
-        run: |
-          npm install
-          npm run build
-
-      - name: Deploy   # 部署
-        uses: JamesIves/github-pages-deploy-action@v4.3.3
-        with:
-          branch: gh-pages # 部署后提交到那个分支
-          folder: dist # 这里填打包好的目录名称
+        env:  
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
+          BRANCH: gh-pages # 或者你希望部署到的分支  
+          FOLDER: dist # 确保这与你的构建输出目录相匹配
