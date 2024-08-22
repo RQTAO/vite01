@@ -24,11 +24,11 @@ jobs:
       - name: Deploy to GitHub Pages  
         uses: JamesIves/github-pages-deploy-action@v4.3.3  
         env:  
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # 使用 GitHub 提供的默认 TOKEN  
-          BRANCH: gh-pages  # 部署到的分支  
-          FOLDER: dist  # 部署文件夹  
-          CLEAN: true  # 清理旧文件  
-          FORCE: true  # 强制推送  
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
+          BRANCH: gh-pages  # 确保这是正确的分支名  
+          FOLDER: dist  
+          CLEAN: true  
+          FORCE: true
   
 # 注意：你不需要在 action 的 with 字段中明确指定 token，因为你可以通过环境变量传递它  
 # 并且，通常我们会使用 GitHub 的默认 GITHUB_TOKEN，它已经作为 secret 可用
