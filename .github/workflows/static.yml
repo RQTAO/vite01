@@ -26,6 +26,12 @@ jobs:
     concurrency: ci-${{ github.ref }}
     runs-on: ubuntu-latest
     steps:
+      - name: Deploy  
+        uses: JamesIves/github-pages-deploy-action@v4.3.3  
+        with:  
+          branch: gh-pages  
+          folder: dist  
+          token: ${{ secrets.ACCESS_TOKEN }}
       - name: Checkout  ️ # 将代码拉取到虚拟机
         uses: actions/checkout@v3
 
